@@ -40,29 +40,48 @@
 
 ```javascript
 /**
- * @param {number[]} nums
- * @return {number[]}
+ * @param {number} n
+ * @return {number[][]}
  */
-var sortedSquares = function(nums) {
-    //类似归并排序，定义两个指针求解（非快慢指针）
-    //先计算出平方后的数组
-    let a=[];
-    for(let i = 0;i<nums.length;i++){
-        nums[i]=nums[i]*nums[i];
-    }
-    i=nums.length-1;
-    //两个指针分别指向数组首尾，然后往中间逼近
-    for(let j = 0;j<=i;){
-        if(nums[j]>=nums[i]){
-            a.push(nums[j]);
-            j++;
+var generateMatrix = function(n) {
+    //需要画loop次圈，每圈四条边，每一圈都从（startX,startY开始画）,每条边都坚持左闭右开的原则
+    //初始化一个全为0的二维数组
+    const a = new Array(n).fill(0).map(v => new Array(n).fill(0));
+    
+    let startX = startY = 0;
+    //初始化填充的元素
+    let x = 1;
+    //定义需要遍历的圈数以及基数时中间位置的元素
+    let loop = mid = Math.floor(n/2);
+    //初始化每条边需要减的长度
+    let offset = 1;
+    if(n == 1) return [[1]];
+    while(loop--){
+        let i = startX;let j = startY;
+        //第一圈，从矩阵左上角元素开始
+        for(;j<startX+n-offset;j++){
+            a[i][j]=x++;
         }
-        else{
-            a.push(nums[i]);
-            i--;
+        //第二圈，从矩阵右上角元素开始
+        for(;i<startY+n-offset;i++){
+            a[i][j]=x++;
         }
+        //第三圈，从矩阵右下角元素开始
+        for(;j>startY;j--){
+            a[i][j]=x++;
+        }
+        for(;i>startX;i--){
+            a[i][j]=x++;
+        }
+        startX++;
+        startY++;
+        offset+=2;
     }
-    return a.reverse();
+    //n为奇数需要单独给它赋值
+    if(n%2==1){
+        a[mid][mid]=x;
+    }
+    return a;
 };
 ```
 

@@ -7,6 +7,7 @@
 - 防止数据溢出（可通过等式变换）
 
 #### 2.Skills
+
 Array： 
 - arrary.toString() ：将数组转换成由逗号分隔的字符串（JavaScript 中一旦字符串被创建就不能被改变，只能转成数组操作）
 - arrary.reverse() ：反转数组 
@@ -19,3 +20,8 @@ Number：
 String：
 - string1.include(string2)；字符串1是否包含字符串2，返回 bool 类型
 - string.replace("a","b"):把字符串的第一个字符`a`替换成`b`
+
+#### 3.Thinking
+
+- 算法中写循环时，多关注起点和终点，以及递进的操作，多用**左闭右开**的原则
+
